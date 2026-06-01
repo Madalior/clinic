@@ -1,0 +1,6 @@
+{
+  "outputDirectory": "sajisri-clinic/dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

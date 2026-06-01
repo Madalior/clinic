@@ -1,0 +1,7 @@
+{
+  "name": "clinic-root",
+  "private": true,
+  "scripts": {
+    "build": "cd sajisri-clinic && npm install && npm run build"
+  }
+}
