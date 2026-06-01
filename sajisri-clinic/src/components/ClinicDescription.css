@@ -1,0 +1,308 @@
+.description-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fbfbfb; /* Soft clinical gray background */
+  padding: 8rem 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+.description-container {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 6rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Left Column: Narrative Content */
+.description-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-tagline {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #718096;
+  margin-bottom: 1.2rem;
+  display: block;
+}
+
+.description-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #1a202c;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.5px;
+}
+
+.description-subtitle {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #4a5568;
+  margin-bottom: 3.5rem;
+}
+
+/* Vertical Features List */
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+.feature-item {
+  display: flex;
+  gap: 1.5rem;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.description-content.is-visible .feature-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.description-content.is-visible .feature-item:nth-child(1) {
+  transition-delay: 0.15s;
+}
+
+.description-content.is-visible .feature-item:nth-child(2) {
+  transition-delay: 0.3s;
+}
+
+.description-content.is-visible .feature-item:nth-child(3) {
+  transition-delay: 0.45s;
+}
+
+.feature-item:hover {
+  transform: translateX(6px);
+}
+
+.feature-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2d3748;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover .feature-icon-wrapper {
+  background: #1a202c;
+  color: #ffffff;
+  border-color: #1a202c;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.4rem;
+}
+
+.feature-index {
+  font-family: 'Mileast', sans-serif;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: #a0aec0;
+  letter-spacing: 0.5px;
+}
+
+.feature-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #2d3748;
+}
+
+.feature-description {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #718096;
+  max-width: 480px;
+}
+
+/* Right Column: Visuals & Metrics */
+.description-visuals {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  justify-content: center;
+  position: relative;
+}
+
+/* Ambient backdrop glow behind image */
+.description-visuals::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(49, 151, 149, 0.12) 0%, rgba(49, 151, 149, 0) 70%);
+  filter: blur(50px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.description-image-wrapper {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+  aspect-ratio: 4 / 3;
+  width: 100%;
+}
+
+.clinic-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.description-image-wrapper:hover .clinic-image {
+  transform: scale(1.06);
+}
+
+.image-overlay-badge {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  padding: 0.7rem 1.3rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #1a202c;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.image-overlay-badge svg {
+  color: #319795; /* Accent teal icon */
+}
+
+/* Statistics Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.8rem;
+  border-top: 1px solid #edf2f7;
+  padding-top: 3rem;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  padding: 1.5rem 1.8rem;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(49, 151, 149, 0.2);
+  box-shadow: 0 15px 35px rgba(49, 151, 149, 0.06);
+  background: #ffffff;
+}
+
+.stat-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #1a202c;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+/* Responsiveness */
+@media (max-width: 992px) {
+  .description-container {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  
+  .description-title {
+    font-size: 2.8rem;
+  }
+  
+  .description-subtitle {
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .description-section {
+    padding: 4rem 5%;
+  }
+  
+  .description-title {
+    font-size: 2rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding-top: 2rem;
+  }
+  
+  .stat-card {
+    padding: 1.2rem 1rem;
+    border-radius: 16px;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .stat-value {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+}

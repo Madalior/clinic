@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@font-face {
+  font-family: 'Mileast';
+  src: url('/fonts/Mileast.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'VictoryStrikerSans';
+  src: url('/fonts/VictoryStrikerSansDemo.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gladolia';
+  src: url('/fonts/GladoliaDEMORegular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --primary: #2d3748;
+  --secondary: #4a5568;
+  --bg-color: #f7fafc;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global Font Overrides for the Premium Editorial Style */
+body, 
+input, 
+select, 
+button, 
+textarea, 
+a, 
+span:not(.service-row-number):not(.feature-index):not(.bg-text-letter) {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+/* Custom Local Font Overrides */
+
+/* 1. Doctor Names: Mileast */
+.bg-text, 
+.bg-text-letter,
+.doctor-card-name {
+  font-family: 'Mileast', sans-serif !important;
+  font-weight: normal !important; /* Disable faux-bolding */
+}
+
+/* 2. Clinic Name (Logo): Victory Striker Sans */
+.logo,
+.sticky-header .logo {
+  font-family: 'VictoryStrikerSans', sans-serif !important;
+}
+
+/* 3. Headlines: Gladolia */
+h1, 
+h2, 
+h3, 
+.description-title, 
+.services-title, 
+.doctors-title, 
+.contact-title,
+.form-header-title,
+.success-title {
+  font-family: 'Gladolia', sans-serif !important;
+  font-weight: normal !important; /* Disable faux-bolding to prevent the text from bleeding/blurring */
+}
+
+/* 4. Navigation Menu, Stats, and Indices (The "Index" Elements) */
+.nav-links a,
+.stat-value,
+.service-row-number,
+.feature-index,
+.current-index,
+.total-slides {
+  font-family: 'Mileast', sans-serif !important;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--primary);
+  overflow-x: hidden;
+}
+
+/* Base utility for smooth transitions */
+.transition-colors {
+  transition: background-color 1.2s cubic-bezier(0.16, 1, 0.3, 1), color 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Scroll Reveal Animation Styles */
+.reveal-element {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-element.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}

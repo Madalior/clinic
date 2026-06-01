@@ -1,0 +1,461 @@
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none; /* Prevent text highlight during swipe drags */
+}
+
+.hero-section.grabbing {
+  cursor: grabbing;
+}
+
+.hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 5%;
+  z-index: 10;
+  position: relative;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.slider-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.bg-text-container {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+}
+
+.bg-text {
+  font-family: 'Playfair Display', serif;
+  font-size: var(--bg-text-size, 25vw);
+  font-weight: 900;
+  line-height: 0.8;
+  margin: 0;
+  user-select: none;
+  letter-spacing: -4px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+.bg-text-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(120px) rotate(8deg);
+  animation: revealLetter 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transition: color 0.8s ease;
+}
+
+@keyframes revealLetter {
+  to {
+    opacity: 0.55; /* Increased opacity from 0.35 to 0.55 for higher visibility */
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.bg-subtext {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 300;
+  margin-top: 2.5rem;
+  opacity: 0;
+  text-align: right;
+  padding-right: 10vw;
+  text-transform: uppercase;
+  --subtext-letter-spacing: 12px;
+  animation: slideSubTextIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.3s;
+}
+
+@keyframes slideSubTextIn {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+    letter-spacing: 2px;
+  }
+  to {
+    opacity: 0.75; /* Increased opacity from 0.5 to 0.75 for higher visibility */
+    transform: translateX(0);
+    letter-spacing: var(--subtext-letter-spacing);
+  }
+}
+
+.image-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: visible; /* Changed to visible to let the doctor's head overflow without clipping */
+}
+
+.doctor-image {
+  position: absolute;
+  bottom: 80px; /* Reduced shift up to prevent head cropping */
+  height: 80%; /* Scale down slightly to ensure full visibility */
+  max-width: 100%;
+  object-fit: contain;
+  opacity: 0;
+  pointer-events: none; /* Let drag/swipe gestures pass through to the slider container */
+  z-index: 5; /* Ensure the doctor's portrait is layered explicitly in front of background text */
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1.2s ease;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4)) grayscale(0.2);
+}
+
+.doctor-image.next {
+  opacity: 0;
+  transform: translateX(180px) scale(0.9) rotate(8deg);
+}
+
+.doctor-image.prev {
+  opacity: 0;
+  transform: translateX(-180px) scale(0.9) rotate(-8deg);
+}
+
+.doctor-image.active {
+  opacity: 1;
+  transform: translateX(0) scale(1.05) rotate(0deg);
+  filter: drop-shadow(0 20px 45px rgba(0,0,0,0.5)) grayscale(0);
+}
+
+.hero-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+}
+
+.curve-container {
+  width: 100%;
+  height: 60px;
+  margin-bottom: -1px; /* Prevents tiny render gaps */
+}
+
+.curve-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.footer-content {
+  background: #ffffff;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  padding: 1rem 5% 2rem 5%;
+}
+
+.footer-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.footer-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.doctor-description {
+  font-family: 'Outfit', sans-serif;
+  color: #4a4a4a;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 380px;
+  font-weight: 400;
+  animation: fadeInText 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.btn-book-appointment {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #ffffff;
+  border: none;
+  padding: 1rem 2.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              background-color 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.btn-book-appointment:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-book-appointment:active {
+  transform: translateY(-1px) scale(1);
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nav-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+  background: #ffffff;
+  color: #333333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.nav-arrow:hover {
+  background: #333333;
+  color: #ffffff;
+  border-color: #333333;
+  transform: scale(1.08);
+}
+
+.slide-counter {
+  font-family: 'Mileast', sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.current-index {
+  color: #333333;
+  font-weight: 700;
+}
+
+.total-slides {
+  color: #999999;
+  font-weight: 400;
+}
+
+.floating-elements-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.floating-icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.2));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  animation-fill-mode: forwards !important;
+}
+
+/* Individual Floating animations with different paths & timings to look organic */
+.float-anim-0 {
+  animation: floatBob1 8s ease-in-out infinite alternate, floatFadeIn 1s ease forwards 0.3s;
+}
+
+.float-anim-1 {
+  animation: floatBob2 10s ease-in-out infinite alternate, floatFadeIn 1s ease forwards 0.5s;
+}
+
+.float-anim-2 {
+  animation: floatBob3 9s ease-in-out infinite alternate, floatFadeIn 1s ease forwards 0.4s;
+}
+
+.float-anim-3 {
+  animation: floatBob1 11s ease-in-out infinite alternate, floatFadeIn 1s ease forwards 0.6s;
+}
+
+.float-anim-4 {
+  animation: floatBob2 12s ease-in-out infinite alternate, floatFadeIn 1s ease forwards 0.7s;
+}
+
+.float-anim-5 {
+  animation: floatBob3 10s ease-in-out infinite alternate, floatFadeIn 1s ease forwards 0.8s;
+}
+
+.floating-icon.blur-effect {
+  filter: blur(4px) drop-shadow(0 10px 25px rgba(0,0,0,0.15));
+}
+
+@keyframes floatFadeIn {
+  to {
+    opacity: 0.45; /* Semi-transparent so it's clean and doesn't distract */
+  }
+}
+
+/* For blurred ones, make them slightly more transparent */
+.floating-icon.blur-effect {
+  animation: floatBob2 10s ease-in-out infinite alternate, floatFadeInBlur 1s ease forwards 0.5s;
+}
+
+@keyframes floatFadeInBlur {
+  to {
+    opacity: 0.25;
+  }
+}
+
+/* Unique organic paths */
+@keyframes floatBob1 {
+  0% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) rotate(5deg) scale(1.02);
+  }
+  100% {
+    transform: translateY(-30px) rotate(10deg) scale(1);
+  }
+}
+
+@keyframes floatBob2 {
+  0% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-25px) rotate(-10deg) scale(0.97);
+  }
+  100% {
+    transform: translateY(-10px) rotate(-5deg) scale(1);
+  }
+}
+
+@keyframes floatBob3 {
+  0% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) rotate(12deg) scale(1.03);
+  }
+  100% {
+    transform: translateY(-20px) rotate(6deg) scale(1);
+  }
+}
+
+@keyframes slideInfoUp {
+  from { opacity: 0; transform: translateY(40px) translateX(-20px); }
+  to { opacity: 1; transform: translateY(0) translateX(0); }
+}
+
+@media (max-width: 768px) {
+  .bg-text-container {
+    top: 28%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+  }
+  .bg-text { 
+    font-size: calc(var(--bg-text-size, 22vw) * 1.5); 
+    letter-spacing: -1px;
+    width: 100%;
+  }
+  .bg-subtext { 
+    font-size: 1.4rem; 
+    --subtext-letter-spacing: 2px;
+    text-align: right;
+    padding-right: 6vw;
+    margin-top: 0;
+    margin-bottom: 0.2rem;
+  }
+
+  
+  .floating-elements-container {
+    display: none; /* Hide particles on mobile to prevent overlapping text and portrait */
+  }
+
+  .image-container {
+    height: 50vh;
+  }
+  
+  .doctor-image {
+    height: 90%;
+    bottom: 30px; /* Shorter offset to match smaller mobile curved footer */
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.8rem 5% 1.5rem 5%;
+    text-align: center;
+  }
+  
+  .footer-left, .footer-center, .footer-right {
+    justify-content: center;
+  }
+  
+  .doctor-description {
+    text-align: center;
+    max-width: 100%;
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+  
+  .btn-book-appointment {
+    padding: 0.8rem 2rem;
+    font-size: 0.85rem;
+    width: 100%;
+    max-width: 260px;
+  }
+  
+  .curve-container {
+    height: 35px;
+  }
+}
